@@ -22,7 +22,4 @@ router.post("/add_node", clusterController.addNodeToCluster);
 router.post("/change_struct", clusterController.changeNodeStructForCluster);
 router.post("/remove_node", clusterController.removeNodeFromCluster);
 
-// router.get("/", (req, res, next) => {logger.debug("geldiiii")});
-
-
 exports.router = router;
