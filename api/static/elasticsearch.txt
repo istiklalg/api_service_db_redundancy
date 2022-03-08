@@ -1,0 +1,34 @@
+# This file is written by atibaApiService
+# /etc/elasticsearch/elasticsearch.yml file
+cluster.name: AtibaEsCluster
+
+# impotant name is node-nodeNumber
+node.name: node-1001011024
+
+# node-1 and node-2 must be like [ master, data ], all the others like [ master, voting_only, data ]. comes from python..
+node.roles: [ master, voting_only, data ]
+
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+bootstrap.memory_lock: true
+network.host: 0.0.0.0
+http.port: 9200
+
+# not ordered !!
+cluster.initial_master_nodes: ["192.168.1.95", "192.168.1.97", "100.100.100.1", "100.101.102.3", "100.101.102.4"]
+discovery.zen.ping.unicast.hosts: ["192.168.1.95", "192.168.1.97", "100.100.100.1", "100.101.102.3", "100.101.102.4"]
+
+discovery.zen.minimum_master_nodes: 1
+thread_pool:
+    search:
+        size: 50
+        queue_size: 1000
+indices.memory.index_buffer_size: 512mb
+xpack.ml.enabled: false
+xpack.security.enabled: false
+xpack.monitoring.enabled: false
+search.allow_expensive_queries: false
+indices.fielddata.cache.size:  20%
+#indices.breaker.fielddata.limit:40%
+#indices.breaker.request.limit:30%
+#indices.breaker.total.limit:50%

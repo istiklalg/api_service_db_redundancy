@@ -1,0 +1,79 @@
+! This file is written by atibaApiService
+! /etc/keepalived/keepalived.conf file
+! Configuration File for keepalived
+
+global_defs {
+    script_user root root
+    enable_script_security
+}
+vrrp_script chk_haproxy { 
+    script "/usr/bin/killall -0 haproxy" 
+    interval 2 
+    weight 2 
+}
+vrrp_instance ATIBA {
+    state BACKUP
+    priority 110
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1234
+    }
+    virtual_ipaddress {
+        {% VRRP_IP %}
+    }
+    track_script {
+        chk_haproxy
+    }
+}
+
+virtual_server {% VRRP_IP %} 514 {
+    delay_loop 1
+    lb_algo rr
+    lb_kind NAT
+    ops
+    protocol UDP
+    persistence_timeout 30
+    
+    real_server 192.168.1.95 11514 {
+            weight 1
+            MISC_CHECK {
+            misc_path "/usr/local/bin/miscchk 192.168.1.95"
+            misc_timeout 3
+        }
+    }
+    
+    real_server 192.168.1.97 11514 {
+            weight 1
+            MISC_CHECK {
+            misc_path "/usr/local/bin/miscchk 192.168.1.97"
+            misc_timeout 3
+        }
+    }
+    
+    real_server 100.100.100.1 11514 {
+            weight 1
+            MISC_CHECK {
+            misc_path "/usr/local/bin/miscchk 100.100.100.1"
+            misc_timeout 3
+        }
+    }
+    
+    real_server 100.101.102.3 11514 {
+            weight 1
+            MISC_CHECK {
+            misc_path "/usr/local/bin/miscchk 100.101.102.3"
+            misc_timeout 3
+        }
+    }
+    
+    real_server 100.101.102.4 11514 {
+            weight 1
+            MISC_CHECK {
+            misc_path "/usr/local/bin/miscchk 100.101.102.4"
+            misc_timeout 3
+        }
+    }
+    
+}
+    
