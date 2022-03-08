@@ -1,0 +1,21 @@
+{
+  "name": "atibaapiservice",
+  "version": "1.0.0",
+  "description": "ATIBA API service for remote machine communications and operative purposes (Camenta Systems)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "istiklal",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  }
+}
