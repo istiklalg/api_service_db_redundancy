@@ -1,14 +1,11 @@
-# this file will be placed in /etc/systemd/system/atibaApiService.service
-# don't forget to make IN_PRODUCTION = true in configuration.js file ...
-
 [Unit]
-Description=ATIBA API SERVICE
+Description=SERVICE DESCRIPTION
 
 [Service]
 ExecStart=server.js
 Restart=always
-User=root
-Environment=PATH=/usr/bin:/usr/local/bin
+User=yourUser
+Environment=PATH=/path/to/environment/bin
 Environment=NODE_ENV=production
 WorkingDirectory=api
 
